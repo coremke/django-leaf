@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+recursive-include leaf/migrations *
+recursive-include leaf/static *
+recursive-include leaf/templates *
+recursive-include leaf/templatetags *
