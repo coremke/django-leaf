@@ -13,7 +13,7 @@
     pip install django-leaf
     ```
 
-2. Add "leaf" to your INSTALLED_APPS setting like this:
+2. Add "leaf" to your INSTALLED_APPS setting:
 
     ```python
     INSTALLED_APPS = (
