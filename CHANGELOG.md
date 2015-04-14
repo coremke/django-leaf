@@ -16,7 +16,7 @@ Boilerplate:
 ### Security
 -->
 
-## v0.0.1 (2015-04-xx)
+## v0.0.1 (2015-04-13)
 
 Initial version.
 
