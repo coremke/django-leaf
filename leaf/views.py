@@ -1,74 +1,13 @@
-import os
-
 from django.http import Http404
 from django.shortcuts import redirect
 from django.template import TemplateDoesNotExist
 from django.template.loader import select_template
 from django.views.generic import TemplateView
 
+from . import page
+
 
 class LeafTemplateView(TemplateView):
-    def _get_url(self):
-        """Get the path from the url route.
-
-        The path can also be passed in through a keyword argument, `url`.
-
-        :returns: The URL path for the requested page.
-
-        """
-        if getattr(self, 'url', None):
-            return self.url
-
-        url = self.kwargs.get('url', None)
-        if url is None:
-            raise Http404("URL not provided as class argument or kwarg")
-
-        if url in ("/", ""):
-            return "index"
-
-        return url
-
-    def _strip_trailing_slash(self, value):
-        """Strips trailing slash if exists."""
-        if value.endswith('/'):
-            return value[:-1]
-
-        return value
-
-    def _get_page_names(self):
-        """Get a list of valid page names.
-
-        Valid page names will be a list of two types:
-
-        1. The full page name provided
-        2. The full page name provided starting with `pages/`
-
-        Page names can also be used as the folder name, so index.html files
-        will also work.
-
-        Example:
-
-        If the url is ``/example/leaf/url/``, the following page names will
-        be returned:
-
-        1. example/leaf/url
-        2. example/leaf/url/index
-        3. pages/example/leaf/url
-        4. pages/example/leaf/url/index
-
-        """
-        pages = []
-
-        page = self._get_url()
-        if page.startswith('admin'):
-            return []
-
-        pages.append(page)
-        pages.append(os.path.join(page, 'index'))
-        pages.append(os.path.join('pages', page))
-        pages.append(os.path.join('pages', page, 'index'))
-
-        return [self._strip_trailing_slash(p) for p in pages]
 
     def dispatch(self, request, *args, **kwargs):
         """Override default to check for pages with optional trailing slash.
@@ -78,8 +17,7 @@ class LeafTemplateView(TemplateView):
 
         """
         try:
-            response = super(LeafTemplateView, self).dispatch(request, *args, **kwargs)
-            return response
+            return super(LeafTemplateView, self).dispatch(request, *args, **kwargs)
         except Http404:
             if not self.request.path.endswith("/"):
                 return redirect(self.request.path + "/")
@@ -106,11 +44,16 @@ class LeafTemplateView(TemplateView):
         4. pages/example/leaf/url/index.html
 
         """
-        template_names = [u"{0}.html".format(p) for p in self._get_page_names()]
+        template_names = [u"{0}.html".format(p) for p in page.get_names(page.get_url(self))]
 
         try:
             t = select_template(template_names)
 
-            return [t.template.name]
+            if hasattr(t, 'template'):
+                # For django >= 1.8
+                return [t.template.name]
+            else:
+                # For django < 1.8
+                return [t.name]
         except (TemplateDoesNotExist, UnicodeEncodeError):
             raise Http404(u"Template could not found. Tried: {0}".format(", ".join(template_names)))
