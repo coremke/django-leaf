@@ -4,7 +4,6 @@ import sys
 from setuptools import setup
 
 if sys.argv[-1] == 'publish':
-    os.system('make build')
     os.system('python setup.py sdist upload')
     sys.exit()
 
