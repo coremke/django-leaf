@@ -35,6 +35,11 @@ class PageAdmin(MPTTModelAdmin):
 
     form = PageAdminForm
 
+    class Media:
+        css = {
+            'all': ('leaf/css/admin.css',)
+        }
+
     def get_inline_instances(self, request, obj=None):
         """Inject the template model fields in the admin."""
         return [i(self.model, self.admin_site) for i in get_inline_classes(obj)]
