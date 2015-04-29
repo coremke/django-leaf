@@ -2,6 +2,48 @@ import os
 
 from django.http import Http404
 
+from .models import PAGE_MODEL_CLASSES, PageNode
+
+
+def get_from_database(path):
+    """Load a page from the database.
+
+    :param path: The path
+    :returns: The page object from the database if it exists,
+              otherwise None
+
+    """
+    # Paths are stored without trailing slash in database,
+    # so remove it if there is one
+    if path.endswith('/'):
+        path = path[:-1]
+
+    try:
+        node = PageNode.objects.exclude(template='').get(path=path)
+    except PageNode.DoesNotExist:
+        return
+
+    page_class = get_page_class(node.template)
+    if page_class is None:
+        return
+
+    try:
+        return page_class.objects.get(node=node)
+    except page_class.DoesNotExist:
+        return
+
+
+def get_page_class(template):
+    """Get the page class for the template defined in the database.
+
+    :param str template: The template name.
+    :returns: The class for the `template`, or None if it doesn't exist.
+
+    """
+    page_class = [p for p in PAGE_MODEL_CLASSES if p.identifier == template]
+    if len(page_class) == 1:
+        return page_class[0]
+
 
 def get_names(url):
     """Get a list of valid page names.

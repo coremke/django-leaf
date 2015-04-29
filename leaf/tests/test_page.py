@@ -1,6 +1,8 @@
 import os
 import pytest
 
+from model_mommy import mommy
+
 
 @pytest.mark.parametrize('value', (
     '',
@@ -83,3 +85,31 @@ def test_get_url_none():
 
     with pytest.raises(Http404):
         get_url(View())
+
+
+@pytest.mark.django_db
+def test_get_from_database():
+    from leaf.page import get_from_database
+    node = mommy.make('leaf.PageNode', slug='test', template='example-page')
+    page_class = mommy.make("leaf_test.PageClass", node=node)
+
+    assert get_from_database('test/') == page_class
+    assert get_from_database('test') == page_class
+
+
+@pytest.mark.django_db
+def test_get_from_database_no_template():
+    from leaf.page import get_from_database
+    mommy.make('leaf.PageNode', slug='test')
+
+    assert get_from_database('test/') is None
+    assert get_from_database('test') is None
+
+
+@pytest.mark.django_db
+def test_get_from_database_no_page_class():
+    from leaf.page import get_from_database
+    mommy.make('leaf.PageNode', slug='test', template='example-page')
+
+    assert get_from_database('test/') is None
+    assert get_from_database('test') is None
