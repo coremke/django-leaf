@@ -22,7 +22,17 @@ def test_page_admin_form():
 @pytest.mark.django_db
 def test_page_admin_form_with_instance():
     from leaf.forms import PageAdminForm
-    instance = mommy.make('leaf_test.PageClass')
+    instance = mommy.make('leaf.PageNode', slug='test', template='example-page')
 
     form = PageAdminForm(instance=instance)
     assert form.fields['template'].widget.attrs['disabled']
+
+
+@pytest.mark.django_db
+def test_page_admin_form_update():
+    from leaf.forms import PageAdminForm
+    instance = mommy.make('leaf.PageNode', slug='test', template='example-page')
+
+    form = PageAdminForm(instance=instance, data={'slug': 'test2'})
+    form.is_valid()
+    assert form.instance.template == 'example-page'

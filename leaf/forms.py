@@ -19,8 +19,25 @@ class PageAdminForm(forms.ModelForm):
         exclude = ('path',)
 
     def __init__(self, *args, **kwargs):
+        """Disable the template field when modifying.
+
+        This field should only be set when creating the page.
+
+        """
         super(PageAdminForm, self).__init__(*args, **kwargs)
 
         instance = getattr(self, 'instance', None)
         if instance and instance.pk:
             self.fields['template'].widget.attrs['disabled'] = True
+
+    def clean_template(self):
+        """Ensure the field is not changed when saving.
+
+        When setting the field to disabled, the browser will not
+        post the selected value. Always make sure it is set here.
+
+        """
+        instance = getattr(self, 'instance', None)
+        if instance and instance.pk:
+            return instance.template
+        return self.cleaned_data.get('template', None)
