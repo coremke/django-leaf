@@ -16,7 +16,13 @@ Boilerplate:
 ### Security
 -->
 
-## v0.0.1 (2015-04-13)
+## v1.1.0 (Unreleased)
+
+### Added
+
+- Support for defining pages in the admin.
+
+## v1.0.0 (2015-04-13)
 
 Initial version.
 

@@ -9,6 +9,8 @@ from . import page
 
 class LeafTemplateView(TemplateView):
 
+    """Render a page from the database or the filesystem."""
+
     def dispatch(self, request, *args, **kwargs):
         """Override default to check for pages with optional trailing slash.
 
@@ -16,12 +18,20 @@ class LeafTemplateView(TemplateView):
         was a 404, try the request again with the trailing slash.
 
         """
+        self.page = page.get_from_database(kwargs.get('url'))
+
         try:
             return super(LeafTemplateView, self).dispatch(request, *args, **kwargs)
         except Http404:
             if not self.request.path.endswith("/"):
                 return redirect(self.request.path + "/")
             raise
+
+    def get_context_data(self, **kwargs):
+        """Add the page to the template context."""
+        context = super(LeafTemplateView, self).get_context_data(**kwargs)
+        context['page'] = self.page
+        return context
 
     def get_template_names(self):
         """Get the template name that should be used for this page.
@@ -44,16 +54,19 @@ class LeafTemplateView(TemplateView):
         4. pages/example/leaf/url/index.html
 
         """
-        template_names = [u"{0}.html".format(p) for p in page.get_names(page.get_url(self))]
+        if self.page:
+            return [self.page.template]
+        else:
+            template_names = [u"{0}.html".format(p) for p in page.get_names(page.get_url(self))]
 
-        try:
-            t = select_template(template_names)
+            try:
+                t = select_template(template_names)
 
-            if hasattr(t, 'template'):
-                # For django >= 1.8
-                return [t.template.name]
-            else:
-                # For django < 1.8
-                return [t.name]
-        except (TemplateDoesNotExist, UnicodeEncodeError):
-            raise Http404(u"Template could not found. Tried: {0}".format(", ".join(template_names)))
+                if hasattr(t, 'template'):
+                    # For django >= 1.8
+                    return [t.template.name]
+                else:
+                    # For django < 1.8
+                    return [t.name]
+            except (TemplateDoesNotExist, UnicodeEncodeError):
+                raise Http404(u"Template could not found. Tried: {0}".format(", ".join(template_names)))
