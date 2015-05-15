@@ -16,7 +16,11 @@ Boilerplate:
 ### Security
 -->
 
-## v1.1.0 (Unreleased)
+## v2.0.0 (2015-05-15)
+
+- Now supports adding additional inlines
+
+## v1.1.0 (2015-04-29)
 
 ### Added
 

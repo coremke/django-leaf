@@ -3,12 +3,14 @@ import pytest
 from model_mommy import mommy
 
 
-def test_tempalte_choices():
+def test_template_choices():
     from leaf.forms import template_choices
 
     assert template_choices() == [
         ('', '---------'),
         ('example-page', 'Page Class'),
+        ('example-page2', 'Page Class2'),
+        ('example-page3', 'Page Class3'),
     ]
 
 

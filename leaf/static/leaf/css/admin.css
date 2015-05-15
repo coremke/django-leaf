@@ -1,12 +1,5 @@
-.inline-group h2,
-.inline-group h3 {
-    display: none;
-}
 .parler-inline-language-tabs {
     margin-top: 10px;
-}
-#change_id_parent {
-    visibility: hidden;
 }
 #suit-center .parler-inline-language-tabs span {
     display: inline-block;

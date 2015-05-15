@@ -51,7 +51,8 @@ There are a few fields available for customization:
 
 1. **identifier**: A unique identifier for your model. This will be used to associate page nodes with your page implementation. If you don't provide an `identifier`, one will be provided for you.
 2. **template**: The template to render.
-3. **admin_inline**: The admin class to use when rendering the template fields inline. This defaults to the default ``admin.StackedInline``.
+3. **admin_page_inline**: The admin class to use when rendering the template fields inline. This defaults to the default ``admin.StackedInline``.
+4. **admin_inlines**: A list of other inlines to add to the admin.
 
 Here's an example for creating a page with translations provided by [django-parler](https://github.com/edoburu/django-parler):
 
@@ -72,7 +73,7 @@ from .admin import AboutPageInline
 
 
 class AboutPage(Page, TranslatableModel):
-    admin_inline = AboutPageInline
+    admin_page_inline = AboutPageInline
     identifier = 'about-page'
     template = "about.html"
 
