@@ -113,3 +113,15 @@ def test_get_from_database_no_page_class():
 
     assert get_from_database('test/') is None
     assert get_from_database('test') is None
+
+
+@pytest.mark.django_db
+def test_get_from_database_home_page():
+    from leaf.page import get_from_database
+    home_page = mommy.make('leaf.PageNode', slug='home', template='example-page')
+    page_class = mommy.make("leaf_test.PageClass", node=home_page)
+
+    assert get_from_database('') == page_class
+    assert get_from_database('/') == page_class
+    assert get_from_database('home') == page_class
+    assert get_from_database('home/') == page_class

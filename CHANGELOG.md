@@ -15,6 +15,9 @@ Boilerplate:
 
 ### Security
 -->
+## v2.1.0 (2015-05-18)
+
+- Add support for the home ('/') page.
 
 ## v2.0.0 (2015-05-15)
 

@@ -18,6 +18,9 @@ def get_from_database(path):
     if path.endswith('/'):
         path = path[:-1]
 
+    if path == '':
+        path = 'home'
+
     try:
         node = PageNode.objects.exclude(template='').get(path=path)
     except PageNode.DoesNotExist:

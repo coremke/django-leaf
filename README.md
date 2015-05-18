@@ -93,6 +93,10 @@ When rendering the template, all of the model fields will be available on the ``
 {{ page.copy }}
 ```
 
+#### Home Page
+
+The root page can be added to django-leaf by adding a new page with `slug=home` and `parent=None`. All pages added under that will be added without the ``home`` part in the path.
+
 # TODO
 
 1. Better documentation.

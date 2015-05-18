@@ -61,11 +61,13 @@ class PageNode(MPTTModel):
 
     def save(self, *args, **kwargs):
         if self.parent:
-            self.path = '{}/{}'.format(self.parent.path, self.slug)
+            if self.parent.path == 'home':
+                # If the parent page is the home page, start
+                # all paths from the root.
+                self.path = '{}'.format(self.slug)
+            else:
+                self.path = '{}/{}'.format(self.parent.path, self.slug)
         else:
             self.path = self.slug
 
         super(PageNode, self).save(*args, **kwargs)
-
-        for c in self.get_children():
-            c.save()
