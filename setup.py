@@ -1,16 +1,12 @@
 import os
-import sys
 
+from codecs import open
 from setuptools import setup
-
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
-    sys.exit()
 
 import leaf
 
-with open('README.md', 'r') as readme_file:
-    readme = readme_file.read()
+with open('DESCRIPTION.rst', encoding='utf-8') as f:
+    long_description = f.read()
 
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
@@ -20,7 +16,9 @@ setup(
     author='Ryan Senkbeil',
     author_email='ryan.senkbeil@gsdesign.com',
     description='Render and serve django templates based on URL.',
-    long_description=readme,
+    long_description=long_description,
+    url='https://github.com/gsmke/django-leaf',
+    license='BSD',
     packages=['leaf'],
     zip_safe=False,
     include_package_data=True,
@@ -30,14 +28,16 @@ setup(
         'six',
     ],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
         'Topic :: Internet :: WWW/HTTP',
     ]
 )
