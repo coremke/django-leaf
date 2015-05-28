@@ -1,6 +1,7 @@
 import six
 
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from mptt.models import MPTTModel, TreeForeignKey
 
 PAGE_MODEL_CLASSES = []
@@ -40,6 +41,7 @@ class Page(six.with_metaclass(PageBase, models.Model)):
         abstract = True
 
 
+@python_2_unicode_compatible
 class PageNode(MPTTModel):
 
     """Basic page node for all leaf pages."""
@@ -56,7 +58,7 @@ class PageNode(MPTTModel):
         unique_together = ('slug', 'parent')
         verbose_name = "page"
 
-    def __unicode__(self):
+    def __str__(self):
         return self.slug
 
     def save(self, *args, **kwargs):

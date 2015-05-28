@@ -15,6 +15,10 @@ Boilerplate:
 
 ### Security
 -->
+## v2.1.1 (2015-05-28)
+
+- Fix __str__ on Python 3
+
 ## v2.1.0 (2015-05-18)
 
 - Add support for the home ('/') page.
