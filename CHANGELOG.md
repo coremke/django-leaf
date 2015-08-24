@@ -15,6 +15,10 @@ Boilerplate:
 
 ### Security
 -->
+## v2.1.2 (2015-08-24)
+
+- Fix version of mptt
+
 ## v2.1.1 (2015-05-28)
 
 - Fix __str__ on Python 3
