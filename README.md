@@ -1,4 +1,4 @@
-# django-leaf
+# ![django-leaf](https://s3.amazonaws.com/django-leaf/img/django-leaf-icon.png) django-leaf
 
 > Render django templates based on URL path.
 
