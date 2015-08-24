@@ -25,7 +25,7 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'django-mptt >=0.7.2, <1.8',
+        'django-mptt >=0.7.2, <0.8',
         'six',
     ],
     classifiers=[
