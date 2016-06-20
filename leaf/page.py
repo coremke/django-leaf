@@ -97,7 +97,7 @@ def get_url(view):
     if getattr(view, 'url', None):
         return view.url
 
-    url = view.kwargs.get('url', None)
+    url = view.kwargs.get('leaf_url', None)
     if url is None:
         raise Http404("URL not provided as class argument or kwarg")
 
