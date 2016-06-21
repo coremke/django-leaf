@@ -15,6 +15,12 @@ Boilerplate:
 
 ### Security
 -->
+## v2.2.0 (2015-08-24)
+
+- Improve jinja2 support
+- Add Code of Conduct
+- Add contributors attribution
+
 ## v2.1.2 (2015-08-24)
 
 - Fix version of mptt
