@@ -21,8 +21,14 @@ class PageBase(models.base.ModelBase):
     def __init__(cls, name, bases, dct):
         super(PageBase, cls).__init__(name, bases, dct)
 
-        if cls._deferred:
-            return
+        # Dj < 1.10
+        try:
+            if cls._deferred:
+                return
+        # Dj >= 1.10
+        except AttributeError:
+            if cls is models.DEFERRED:
+                return
 
         if not cls._meta.abstract:
             if not getattr(cls, 'identifier', None):
