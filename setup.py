@@ -15,7 +15,7 @@ setup(
     name='django-leaf',
     version=leaf.__version__,
     author='Ryan Senkbeil',
-    author_email='ryan.senkbeil@gsdesign.com',
+    author_email='techinfo@gsdesign.com',
     description='Render and serve django templates based on URL.',
     long_description=long_description,
     url='https://github.com/gsmke/django-leaf',

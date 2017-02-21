@@ -15,7 +15,7 @@ Boilerplate:
 
 ### Security
 -->
-## v2.2.0 (2015-08-24)
+## v2.2.0 (2015-02-21)
 
 - Improve jinja2 support ([#2](https://github.com/gsmke/django-leaf/pull/2))
 - Add Code of Conduct
