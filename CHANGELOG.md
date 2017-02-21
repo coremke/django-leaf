@@ -17,9 +17,10 @@ Boilerplate:
 -->
 ## v2.2.0 (2015-08-24)
 
-- Improve jinja2 support
+- Improve jinja2 support ([#2](https://github.com/gsmke/django-leaf/pull/2))
 - Add Code of Conduct
 - Add contributors attribution
+- Add support for Django 1.10+ ([#3](https://github.com/gsmke/django-leaf/pull/3))
 
 ## v2.1.2 (2015-08-24)
 
