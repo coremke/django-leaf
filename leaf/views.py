@@ -18,7 +18,7 @@ class LeafTemplateView(TemplateView):
         was a 404, try the request again with the trailing slash.
 
         """
-        self.page = page.get_from_database(kwargs.get('url'))
+        self.page = page.get_from_database(kwargs.get('leaf_url'))
 
         try:
             return super(LeafTemplateView, self).dispatch(request, *args, **kwargs)
