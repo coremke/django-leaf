@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('rght', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('tree_id', models.PositiveIntegerField(editable=False, db_index=True)),
                 ('level', models.PositiveIntegerField(editable=False, db_index=True)),
-                ('parent', mptt.fields.TreeForeignKey(related_name='children', blank=True, to='leaf.PageNode', null=True)),
+                ('parent', mptt.fields.TreeForeignKey(related_name='children', blank=True, to='leaf.PageNode', null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'page',

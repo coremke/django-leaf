@@ -15,7 +15,7 @@ setup(
     name='django-leaf',
     version=leaf.__version__,
     author='Ryan Senkbeil',
-    author_email='ryan.senkbeil@gsdesign.com',
+    author_email='sysadmin@corecreative.com',
     description='Render and serve django templates based on URL.',
     long_description=long_description,
     url='https://github.com/gsmke/django-leaf',
@@ -25,7 +25,7 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'django-mptt >=0.7.2, <0.8',
+        'django-mptt >= 0.11.0',
         'six',
     ],
     classifiers=[
@@ -35,10 +35,9 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.8',
         'Topic :: Internet :: WWW/HTTP',
     ]
 )

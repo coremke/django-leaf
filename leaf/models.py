@@ -41,7 +41,7 @@ class Page(six.with_metaclass(PageBase, models.Model)):
 
     """Abstract base model for all leaf pages."""
 
-    node = models.OneToOneField('PageNode', related_name='+')
+    node = models.OneToOneField('PageNode', related_name='+', on_delete=models.CASCADE)
 
     class Meta:
         abstract = True
@@ -53,7 +53,7 @@ class PageNode(MPTTModel):
     """Basic page node for all leaf pages."""
 
     slug = models.SlugField(max_length=50, unique=True)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True, on_delete=models.CASCADE)
     template = models.CharField(max_length=255, blank=True)
     path = models.CharField(max_length=255, blank=True, db_index=True)
 

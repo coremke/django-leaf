@@ -15,6 +15,12 @@ Boilerplate:
 
 ### Security
 -->
+## v2.2.1 (2020-05-05)
+
+- Add support for Django 2.2
+- Update mptt dependency to mptt==0.11.0
+- For anyone updating to this version, it requires a migration
+
 ## v2.2.0 (2015-08-24)
 
 - Improve jinja2 support ([#2](https://github.com/gsmke/django-leaf/pull/2))
